@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import basketball from './css/images/basketball.png';
 import './App.css';
 import Team from './Components/Team.js';
 import Game from './Components/Game.js';
@@ -7,6 +7,9 @@ import Game from './Components/Game.js';
 class App extends Component {
   constructor() {
     super();
+
+    this.updateScore = this.updateScore.bind(this);
+    this.updateFoul = this.updateFoul.bind(this);
 
     // initial default state
     this.state = {
@@ -34,17 +37,37 @@ class App extends Component {
     }
   }
 
+  updateScore(teamName, newPoints) {
+    const teams = {...this.state.team};
+    teamName.points += newPoints;
+    this.setState({team: teams});
+  }
+
+  updateFoul(teamName, newFoul) {
+    const teams = {...this.state.team};
+    teamName.fouls += newFoul;
+    this.setState({team: teams});
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <img src={basketball} className="App-logo" alt="logo" />
+          <h1 className="App-title">Scoreboard</h1>
         </header>
         <div className="content">
-          <Team side="Home" teamScore={this.state.team.home}/>
+          <Team
+            side="Home" teamScore={this.state.team.home}
+            updateScore={this.updateScore}
+            updateFoul={this.updateFoul}
+          />
           <Game gameInfo={this.state.game} />
-          <Team side="Away" teamScore={this.state.team.away}/>
+          <Team
+            side="Away" teamScore={this.state.team.away}
+            updateScore={this.updateScore}
+            updateFoul={this.updateFoul}
+          />
         </div>
       </div>
     );

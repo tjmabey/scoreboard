@@ -9,7 +9,11 @@ class Game extends React.Component {
           {game.time}
         </div>
         <div className="row poss">
-          {game.possession}
+
+          {game.possession === 0 ? '< Possession' : 'Possession >'}
+        </div>
+        <div className="row period-label">
+          <h2>Period</h2>
         </div>
         <div className="row period">
           {game.period}
