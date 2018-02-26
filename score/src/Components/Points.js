@@ -5,7 +5,7 @@ class Points extends React.Component {
     const team = this.props.team;
     return (
       <div>
-        <div className="row points">
+        <div className="row points numeric-display">
           {team.points}
         </div>
         <div className="row point-btn-container">

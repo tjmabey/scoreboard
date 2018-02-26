@@ -49,7 +49,7 @@ class Team extends React.Component {
         <Bonus team={teamScore}/>
         <div className="row fouls">
           <h2>Fouls</h2>
-          <h2>{teamScore.fouls}</h2>
+          <div className="foul-count numeric-display">{teamScore.fouls}</div>
           <div className="row foul-btn-container">
             {this.renderFoulButtons()}
           </div>
