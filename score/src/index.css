@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+}
+
+.points {
+  color: orange;
+  font-size: 48px;
+}
+
+.side {
+  font-size: 36px;
+}
+
+.time {
+  color: red;
+  font-size: 56px;
+}
