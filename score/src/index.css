@@ -19,8 +19,12 @@ body {
   border-radius: 10px;
   border: none;
   font-size: 22px;
-  background-color: #2ecc71;
+  width: 2em;
   color: white;
+}
+
+.btn:focus {
+  outline: none;
 }
 
 .team {
@@ -34,7 +38,7 @@ body {
 }
 
 .points {
-  color: orange;
+  color: #e67e22;
   font-size: 84px;
   background-color: black;
   border: solid white 1px;
@@ -66,5 +70,49 @@ body {
 }
 
 .point-btn {
-  width: 2em;
+  background-color: #2ecc71;
+}
+
+.foul-btn {
+  background-color: #e74c3c;
+  margin: 0 12px;
+}
+
+.foul-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.circle-red {
+	width: 1em;
+	height: 1em;
+	background: red;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+.circle-grey {
+	width: 1em;
+	height: 1em;
+	background: grey;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+.bonus-container {
+  display: flex;
+  font-size: 22px;
+  justify-content: space-between;
+}
+
+.bonus-circles {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-around;
+}
+
+.bonus-text {
+  flex-grow: 1;
 }

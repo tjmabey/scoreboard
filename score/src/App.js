@@ -46,6 +46,14 @@ class App extends Component {
   updateFoul(teamName, newFoul) {
     const teams = {...this.state.team};
     teamName.fouls += newFoul;
+    if (teamName.fouls < 7) {
+      teamName.bonus = 0;
+    }
+    else if (teamName.fouls >= 7 && teamName.fouls < 10) {
+      teamName.bonus = 1;
+    } else if (teamName.fouls >= 10) {
+      teamName.bonus = 2;
+    }
     this.setState({team: teams});
   }
 

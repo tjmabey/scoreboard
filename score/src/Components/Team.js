@@ -1,5 +1,6 @@
 import React from 'react';
 import Points from './Points.js'
+import Bonus from './Bonus.js'
 
 class Team extends React.Component {
   constructor() {
@@ -14,12 +15,12 @@ class Team extends React.Component {
       return(
         <div>
           <button
-            className="foul-btn"
+            className="btn foul-btn"
             onClick={() => this.props.updateFoul(teamScore, 1)}>
             + 1
           </button>
           <button
-            className="foul-btn"
+            className="btn foul-btn"
             onClick={() => this.props.updateFoul(teamScore, -1)}>
             - 1
           </button>
@@ -27,7 +28,7 @@ class Team extends React.Component {
       )
     } else {
       return <button
-        className="foul-btn"
+        className="btn foul-btn"
         onClick={() => this.props.updateFoul(teamScore, 1)}>
         + 1
       </button>
@@ -45,14 +46,11 @@ class Team extends React.Component {
         <Points
           team={teamScore} updateScore={this.props.updateScore}
         />
-        <div className="row bonus">
-          {/* {teamScore.bonus} */}
-          Bonus
-        </div>
+        <Bonus team={teamScore}/>
         <div className="row fouls">
           <h2>Fouls</h2>
-          {teamScore.fouls}
-          <div className="foul-btn-container">
+          <h2>{teamScore.fouls}</h2>
+          <div className="row foul-btn-container">
             {this.renderFoulButtons()}
           </div>
         </div>
