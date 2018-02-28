@@ -3,7 +3,6 @@ import React from 'react';
 class Bonus extends React.Component {
   render() {
     const team = this.props.team
-    let bonusText;
     let firstCircle="grey";
     let secondCircle="grey";
     let bonus = <span>Bonus</span>;

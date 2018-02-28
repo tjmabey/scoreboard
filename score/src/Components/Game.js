@@ -1,6 +1,39 @@
 import React from 'react';
+import Possession from './Possession.js';
 
 class Game extends React.Component {
+  // constructor() {
+  //   super();
+  //   this.renderPossession = this.renderPossession.bind(this);
+  // }
+
+  // renderPossession(side) {
+  //   if (side === 0) {
+  //     return (
+  //       <div className="flex flex-row">
+  //         <div className="triangle-left"></div>
+  //         <button
+  //           className="btn possession-btn"
+  //           onClick={() => this.props.updatePossession()}
+  //           >Possession</button>
+  //         <div></div>
+  //       </div>
+  //     )
+  //   } else {
+  //     return (
+  //       <div className="flex flex-row">
+  //         <div></div>
+  //         <button
+  //           className="btn possession-btn"
+  //           onClick={() => this.props.updatePossession()}
+  //           >Possession</button>
+  //         <div className="triangle-right"></div>
+  //       </div>
+  //     )
+  //   }
+  //
+  // }
+
   render() {
     const game = this.props.gameInfo
     return (
@@ -9,8 +42,7 @@ class Game extends React.Component {
           {game.time}
         </div>
         <div className="row poss">
-
-          {game.possession === 0 ? '< Possession' : 'Possession >'}
+          <Possession game={game} updatePossession={this.props.updatePossession}/>
         </div>
         <div className="row period-label">
           <h2>Period</h2>

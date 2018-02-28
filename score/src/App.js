@@ -10,6 +10,7 @@ class App extends Component {
 
     this.updateScore = this.updateScore.bind(this);
     this.updateFoul = this.updateFoul.bind(this);
+    this.updatePossession = this.updatePossession.bind(this);
 
     // initial default state
     this.state = {
@@ -57,6 +58,12 @@ class App extends Component {
     this.setState({team: teams});
   }
 
+  updatePossession() {
+    const currentGameState = {...this.state.game};
+    currentGameState.possession = (currentGameState.possession === 0 ? 1 : 0);
+    this.setState({game: currentGameState});
+  }
+
   render() {
     return (
       <div className="App">
@@ -70,7 +77,10 @@ class App extends Component {
             updateScore={this.updateScore}
             updateFoul={this.updateFoul}
           />
-          <Game gameInfo={this.state.game} />
+          <Game
+            gameInfo={this.state.game}
+            updatePossession={this.updatePossession}
+            />
           <Team
             side="Away" teamScore={this.state.team.away}
             updateScore={this.updateScore}
