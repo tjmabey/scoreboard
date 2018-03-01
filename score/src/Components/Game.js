@@ -38,7 +38,7 @@ class Game extends React.Component {
     const game = this.props.gameInfo
     return (
       <div className="game">
-        <div className="row time">
+        <div className="row time numeric-display clock-top">
           {game.time}
         </div>
         <div className="row poss">

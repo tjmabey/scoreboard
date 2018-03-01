@@ -16,7 +16,7 @@ class Possession extends React.Component {
 
 
     return (
-      <div className="flex flex-row align-items-center">
+      <div className="flex flex-row align-items-center justify-content-center">
         <div className={`triangle-left-${leftSide}`}></div>
         <button
           className="btn possession-btn"

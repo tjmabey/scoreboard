@@ -54,7 +54,7 @@ body {
 }
 
 .time {
-  color: red;
+  color: #e74c3c;
   font-size: 108px;
 }
 
@@ -135,7 +135,7 @@ body {
 }
 
 .foul-count {
-  font-size: 32px;
+  font-size: 48px;
   color: #2980b9;
 }
 
@@ -185,4 +185,12 @@ body {
 
 .align-items-center {
   align-items: center;
+}
+
+.clock-top {
+  margin-top: 50px;
+}
+
+.justify-content-center {
+  justify-content: center;
 }
