@@ -32,6 +32,7 @@ class App extends Component {
       },
       game: {
         'time': 0,
+        'running': false,
         'period': 1,
         'possession': 0
       }
