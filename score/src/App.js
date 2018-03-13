@@ -5,12 +5,14 @@ import Team from './Components/Team.js';
 import Game from './Components/Game.js';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.updateScore = this.updateScore.bind(this);
     this.updateFoul = this.updateFoul.bind(this);
     this.updatePossession = this.updatePossession.bind(this);
+    this.updateClock = this.updateClock.bind(this);
+    this.tick = this.tick.bind(this);
 
     // initial default state
     this.state = {
@@ -31,11 +33,31 @@ class App extends Component {
         }
       },
       game: {
-        'time': 0,
+        'time': 900,
         'running': false,
         'period': 1,
         'possession': 0
       }
+    }
+  }
+
+  tick() {
+    const game = {...this.state.game};
+    game.time = game.time - 1;
+    this.setState({game});
+  }
+
+  updateClock() {
+    const game = {...this.state.game};
+    game.running = !game.running;
+    console.log(game);
+    this.setState({game});
+
+    if (game.running) {
+      // run clock
+      this.clock = setInterval(this.tick, 1000);
+    } else {
+      clearInterval(this.clock);
     }
   }
 
@@ -81,6 +103,7 @@ class App extends Component {
           <Game
             gameInfo={this.state.game}
             updatePossession={this.updatePossession}
+            updateClock={this.updateClock}
             />
           <Team
             side="Away" teamScore={this.state.team.away}

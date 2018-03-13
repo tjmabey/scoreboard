@@ -45,8 +45,11 @@ body {
   background-color: black;
   border: solid white 1px;
   border-radius: 8px;
-  width: 2em;
   height: 1.25em;
+}
+
+.score-display {
+  width: 2em;
 }
 
 .side {
