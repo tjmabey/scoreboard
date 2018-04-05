@@ -45,6 +45,7 @@ class App extends Component {
   resetClock() {
     const game = {...this.state.game};
     if (game.running) {
+      console.log('game was running');
       this.updateClock();
     }
     game.time = 900;
@@ -58,7 +59,6 @@ class App extends Component {
   }
 
   updateClock() {
-    console.log("clock did update");
     const game = {...this.state.game};
     game.running = !game.running;
     this.setState({game});
@@ -101,7 +101,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={basketball} className="App-logo" alt="logo" />
+          <img src={basketball} className={`App-logo ${(this.state.game.running) ? "" : "pause-animation"}`} alt="logo" />
           <h1 className="App-title">Scoreboard</h1>
         </header>
         <div className="content">
