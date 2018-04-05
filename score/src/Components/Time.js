@@ -19,7 +19,10 @@ class Time extends React.Component {
           >
             {buttonText}
           </button>
-          <button className="btn possession-btn">Reset</button>
+          <button
+            className="btn possession-btn"
+            onClick={() => this.props.resetClock()}
+            >Reset</button>
         </div>
       </div>
     )

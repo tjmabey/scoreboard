@@ -7,7 +7,7 @@ class Game extends React.Component {
     const game = this.props.gameInfo
     return (
       <div className="game">
-        <Time time={game} updateClock={this.props.updateClock} />
+        <Time time={game} updateClock={this.props.updateClock} resetClock={this.props.resetClock} />
         <div className="row poss">
           <Possession game={game} updatePossession={this.props.updatePossession}/>
         </div>

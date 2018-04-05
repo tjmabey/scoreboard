@@ -8,6 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.resetClock = this.resetClock.bind(this);
     this.updateScore = this.updateScore.bind(this);
     this.updateFoul = this.updateFoul.bind(this);
     this.updatePossession = this.updatePossession.bind(this);
@@ -41,6 +42,15 @@ class App extends Component {
     }
   }
 
+  resetClock() {
+    const game = {...this.state.game};
+    if (game.running) {
+      this.updateClock();
+    }
+    game.time = 900;
+    this.setState({game});
+  }
+
   tick() {
     const game = {...this.state.game};
     game.time = game.time - 1;
@@ -48,9 +58,9 @@ class App extends Component {
   }
 
   updateClock() {
+    console.log("clock did update");
     const game = {...this.state.game};
     game.running = !game.running;
-    console.log(game);
     this.setState({game});
 
     if (game.running) {
@@ -104,6 +114,7 @@ class App extends Component {
             gameInfo={this.state.game}
             updatePossession={this.updatePossession}
             updateClock={this.updateClock}
+            resetClock={this.resetClock}
             />
           <Team
             side="Away" teamScore={this.state.team.away}
