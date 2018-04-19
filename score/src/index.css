@@ -81,6 +81,12 @@ body {
   margin: 6px;
 }
 
+.point-btn-red {
+  background-color: #e74c3c;
+  width: 2em;
+  margin: 6px;
+}
+
 .foul-btn {
   background-color: #e74c3c;
   margin: 0 12px;

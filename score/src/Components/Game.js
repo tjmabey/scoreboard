@@ -14,7 +14,7 @@ class Game extends React.Component {
         <div className="row period-label">
           <h2>Period</h2>
         </div>
-        <div className="row period">
+        <div className="row period numeric-display">
           {game.period}
         </div>
       </div>

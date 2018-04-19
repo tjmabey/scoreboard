@@ -20,6 +20,7 @@ class App extends Component {
       team: {
         home: {
           'name': 'Home',
+          'side': 'home',
           'points': 0,
           'fouls': 0,
           'tol': 3,
@@ -27,6 +28,7 @@ class App extends Component {
         },
         away: {
           'name': 'Away',
+          'side': 'away',
           'points': 0,
           'fouls': 0,
           'tol': 3,
@@ -45,8 +47,9 @@ class App extends Component {
   resetClock() {
     const game = {...this.state.game};
     if (game.running) {
-      console.log('game was running');
-      this.updateClock();
+      game.running = !game.running;
+      clearInterval(this.clock);
+      this.setState({game});
     }
     game.time = 900;
     this.setState({game});
