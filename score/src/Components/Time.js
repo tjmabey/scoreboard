@@ -4,7 +4,6 @@ class Time extends React.Component {
   render() {
     const time = this.props.time.time;
     const running = this.props.time.running;
-    const buttonText = running ? 'Stop' : 'Start';
     let minutes = Math.floor(time / 60);
     let seconds = time % 60;
     return (
@@ -14,10 +13,18 @@ class Time extends React.Component {
         </div>
         <div className="row flex flex-row justify-content-center">
           <button
-            className="btn possession-btn"
-            onClick={() => this.props.updateClock()}
+            className="btn possession-btn btn-green"
+            onClick={() => this.props.startClock()}
+            disabled={(running) ? true : false}
           >
-            {buttonText}
+            Start
+          </button>
+          <button
+            className="btn possession-btn"
+            onClick={() => this.props.stopClock()}
+            disabled={(!running) ? true : false}
+          >
+            Stop
           </button>
           <button
             className="btn possession-btn"

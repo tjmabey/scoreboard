@@ -10,8 +10,6 @@ class Team extends React.Component {
 
   renderFoulButtons() {
     const teamScore = this.props.teamScore;
-
-    if (teamScore.fouls > 0) {
       return(
         <div>
           <button
@@ -21,18 +19,13 @@ class Team extends React.Component {
           </button>
           <button
             className="btn foul-btn"
-            onClick={() => this.props.updateFoul(teamScore, -1)}>
+            onClick={() => this.props.updateFoul(teamScore, -1)}
+            disabled={(this.props.teamScore.fouls === 0) ? true : false}
+            >
             - 1
           </button>
         </div>
       )
-    } else {
-      return <button
-        className="btn foul-btn"
-        onClick={() => this.props.updateFoul(teamScore, 1)}>
-        + 1
-      </button>
-    }
   }
 
   render() {

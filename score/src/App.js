@@ -13,6 +13,8 @@ class App extends Component {
     this.updateFoul = this.updateFoul.bind(this);
     this.updatePossession = this.updatePossession.bind(this);
     this.updateClock = this.updateClock.bind(this);
+    this.startClock = this.updateClock.bind(this);
+    this.stopClock = this.updateClock.bind(this);
     this.tick = this.tick.bind(this);
 
     // initial default state
@@ -36,7 +38,8 @@ class App extends Component {
         }
       },
       game: {
-        'time': 900,
+        'time': 9,
+        'quarterLength': 900,
         'running': false,
         'period': 1,
         'possession': 0
@@ -51,7 +54,7 @@ class App extends Component {
       clearInterval(this.clock);
       this.setState({game});
     }
-    game.time = 900;
+    game.time = game.quarterLength;
     this.setState({game});
   }
 
@@ -71,6 +74,24 @@ class App extends Component {
       this.clock = setInterval(this.tick, 1000);
     } else {
       clearInterval(this.clock);
+    }
+  }
+
+  startClock() {
+    const game = {...this.state.game};
+    if (!game.running) {
+      this.clock = setInterval(this.tick, 1000);
+      game.running = !game.running;
+      this.setState({game});
+    }
+  }
+
+  stopClock() {
+    const game = {...this.state.game};
+    if (game.running) {
+      clearInterval(this.clock);
+      game.running = !game.running;
+      this.setState({game});
     }
   }
 
@@ -117,6 +138,8 @@ class App extends Component {
             gameInfo={this.state.game}
             updatePossession={this.updatePossession}
             updateClock={this.updateClock}
+            startClock={this.startClock}
+            stopClock={this.stopClock}
             resetClock={this.resetClock}
             />
           <Team

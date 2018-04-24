@@ -71,8 +71,8 @@ body {
 }
 
 .point-btn-container {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
 }
 
 .point-btn {
@@ -89,7 +89,7 @@ body {
 
 .foul-btn {
   background-color: #e74c3c;
-  margin: 0 12px;
+  margin: 6px;
   width: 2em;
 }
 
@@ -203,4 +203,8 @@ body {
 
 .justify-content-center {
   justify-content: center;
+}
+
+.btn-green {
+  background-color: #2ecc71;
 }
