@@ -26,6 +26,7 @@ class Points extends React.Component {
             <button
               className="btn point-btn-red"
               onClick={() => this.props.updateScore(team, -1)}
+              disabled={(team.points === 0) ? true : false}
               >
                 -1
             </button>

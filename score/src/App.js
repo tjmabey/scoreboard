@@ -3,6 +3,8 @@ import basketball from './css/images/basketball.png';
 import './App.css';
 import Team from './Components/Team.js';
 import Game from './Components/Game.js';
+import Sound from 'react-sound';
+// import * as audio from './Components/audio'
 
 class App extends Component {
   constructor(props) {
@@ -12,13 +14,15 @@ class App extends Component {
     this.updateScore = this.updateScore.bind(this);
     this.updateFoul = this.updateFoul.bind(this);
     this.updatePossession = this.updatePossession.bind(this);
-    this.updateClock = this.updateClock.bind(this);
-    this.startClock = this.updateClock.bind(this);
-    this.stopClock = this.updateClock.bind(this);
+    this.startClock = this.startClock.bind(this);
+    this.stopClock = this.stopClock.bind(this);
     this.tick = this.tick.bind(this);
+    this.nextPeriod = this.nextPeriod.bind(this);
+    // this.startSound = this.startSound.bind(this);
+    // this.stopSound = this.stopSound.bind(this);
 
     // initial default state
-    this.state = {
+    this.defaultState = {
       team: {
         home: {
           'name': 'Home',
@@ -38,13 +42,36 @@ class App extends Component {
         }
       },
       game: {
-        'time': 9,
-        'quarterLength': 900,
+        'time': 3,
+        'quarterLength': 3,
         'running': false,
         'period': 1,
-        'possession': 0
+        'numPeriods': 4,
+        'possession': 0,
+        'buzzer': 'STOPPED'
       }
     }
+    this.state = this.defaultState;
+  }
+
+  nextPeriod() {
+    const game = {...this.state.game};
+    if (game.period + 1 <= game.numPeriods) {
+      // if there is another quarter/half to play
+      game.time = game.quarterLength;
+      game.period = game.period + 1;
+      if (game.period > game.numPeriods/2) {
+        const teams = {...this.state.team};
+        teams.away.fouls = 0;
+        teams.home.fouls = 0;
+        teams.away.tol = 3;
+        teams.home.tol = 3;
+        this.setState({teams});
+      }
+      this.clock = setInterval(this.tick, 1000);
+      game.running = !game.running;
+    }
+    this.setState({game});
   }
 
   resetClock() {
@@ -54,35 +81,38 @@ class App extends Component {
       clearInterval(this.clock);
       this.setState({game});
     }
-    game.time = game.quarterLength;
-    this.setState({game});
+    this.setState(this.defaultState);
   }
 
   tick() {
     const game = {...this.state.game};
     game.time = game.time - 1;
-    this.setState({game});
-  }
-
-  updateClock() {
-    const game = {...this.state.game};
-    game.running = !game.running;
-    this.setState({game});
-
-    if (game.running) {
-      // run clock
-      this.clock = setInterval(this.tick, 1000);
-    } else {
+    if (game.time === 0) {
       clearInterval(this.clock);
+      game.running = !game.running;
+      // setTimeout(() => {
+      //   game.buzzer = 'PLAYING';
+      //   this.setState({game});
+      // }, 500);
+      // game.buzzer = 'STOPPED';
+      this.setState({game});
+      // if (game.period === game.numPeriods) {
+        // console.log('game over');
+      // }
     }
+    this.setState({game});
   }
 
   startClock() {
     const game = {...this.state.game};
     if (!game.running) {
-      this.clock = setInterval(this.tick, 1000);
-      game.running = !game.running;
-      this.setState({game});
+      if (game.time === 0) {
+        this.nextPeriod();
+      } else {
+        this.clock = setInterval(this.tick, 1000);
+        game.running = !game.running;
+        this.setState({game});
+      }
     }
   }
 
@@ -121,6 +151,18 @@ class App extends Component {
     this.setState({game: currentGameState});
   }
 
+  // startSound(sound) {
+  //   if (this.sounds[sound]) {
+  //     this.sounds[sound].currentTime = 0;
+  //     this.sounds[sound].play();
+  //   }
+  // }
+  // stopSound(sound) {
+  //   if (this.sounds[sound]) {
+  //     this.sounds[sound].pause();
+  //   }
+  // }
+
   render() {
     return (
       <div className="App">
@@ -148,6 +190,10 @@ class App extends Component {
             updateFoul={this.updateFoul}
           />
         </div>
+        <Sound
+          url="./assets/horn.mp3"
+          playStatus={this.state.game.buzzer}
+          playFromPosition={0}/>
       </div>
     );
   }
